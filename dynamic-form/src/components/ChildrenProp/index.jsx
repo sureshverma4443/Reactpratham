@@ -10,4 +10,4 @@ const Wrapper = ({Children})=>{
     )
 }
 
-export default Wraper;
+export default Wrapper;

@@ -25,11 +25,11 @@ function App() {
 console.log("formData",formData);
 
   return (
-    <Wrapper>
+    <>
     <Select currentValue={formData.subject} optionsList={subject} selectLable={"Subject"} setData={(updatedSubject=>setFormData({...formData,subject:updatedSubject}))} />
     <Select currentValue={formData.subject} optionsList={hobbies} selectLable={"hobbies"} setData={(updatedHobbies=>setFormData({...formData,hobby:updatedHobbies}))} />
-    <Radio currentValue={formData.subject} optionsList={radio}  lableText={"Roll"}  />
-    </Wrapper>
+    <Radio currentValue={formData.subject} optionsList={radio} name={"Roll"} lableText={"Roll"}  setData ={(updatedRoll)=>setFormData({...formData,roll:updatedRoll})}/>
+   </>
   )
 }
 
