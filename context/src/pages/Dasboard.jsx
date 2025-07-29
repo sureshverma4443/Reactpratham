@@ -1,10 +1,15 @@
 
 import React from 'react'
 import { useUser } from '../constext/UserContext/UserProvider';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Dashboard = () =>{
     const {user} = useUser();
+    const navigate = useNavigate();
+    
+    const handlePostClick = ()=>{
+      navigate(`secure/Post`)
+    }
 
   return (
     <div>
@@ -12,6 +17,7 @@ const Dashboard = () =>{
         <h1>Dasboard</h1>
         <h3>{user.name}</h3>
         <p>{user.email}</p>
+        <button  onClick={handlePostClick} >Get Post</button>
     </div>
     
   )

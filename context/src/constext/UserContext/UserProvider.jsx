@@ -1,5 +1,5 @@
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { createContext } from "react";
 
@@ -7,10 +7,21 @@ import { createContext } from "react";
 export const UseContext = createContext();
 
 const UserProvider = ({children})=>{
-    const [user,setUser] = useState({
-        name:"",
-        email:""
-    });
+    // const [user,setUser] = useState({
+    //     name:"",
+    //     email:""
+    // });
+
+    const [user,setUser] = useState(()=>{
+        const saveUser = localStorage.getItem("UserData");
+        return saveUser?JSON.parse(saveUser):{name:"",email:""}
+    })
+    
+    useEffect (()=>{
+        if(user?.name?.length)localStorage.setItem("userData",JSON.stringify(user))
+    },[user])
+
+    
     console.log("user from context",user);
     return(
         <UseContext.Provider value={{user,setUser}}>
