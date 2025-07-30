@@ -18,7 +18,7 @@ const UserProvider = ({children})=>{
     })
     
     useEffect (()=>{
-        if(user?.name?.length)localStorage.setItem("userData",JSON.stringify(user))
+        if(user?.name?.length)localStorage.setItem("UserData",JSON.stringify(user))
     },[user])
 
     

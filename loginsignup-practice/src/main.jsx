@@ -2,13 +2,14 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
-import UserlistProvider from './constext/Userlist.jsx'
+import UserProvider from './constext/UserProvider.jsx'
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <UserlistProvider>
+    <UserProvider>
 
     <App />
-    </UserlistProvider>
+    </UserProvider>
   </StrictMode>,
 )
