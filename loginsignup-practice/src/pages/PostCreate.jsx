@@ -1,45 +1,63 @@
-
-
-import React, { useState } from 'react'
-import { useUser } from '../constext/UserProvider'
+import React, { useState } from 'react';
+import { useUser } from '../constext/UserProvider';
+import { useNavigate } from 'react-router-dom';
+import { usePost } from '../constext/PostProvider';
 
 const INITIAL_VALUE = {
-    tittle:"",
-    body:""
+  title: "",
+  body: "",
+  author: ""
+};
 
-}
+const PostCreate = () => {
+  const { user } = useUser(); // Get logged-in user
+  const {setPost}= usePost()
+  const navigate = useNavigate ();
+  const [createPost, setCreatePost] = useState({
+    ...INITIAL_VALUE,
+    author: `${user?.fname || ""} ${user?.lname || ""}`
+  });
 
-const PostCreate=()=> {
-    const {setUser}=useUser()
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCreatePost(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    
+  };
+ const handleSubmit = (e)=>{
+  e.preventDefault()
+  setPost((prev)=>[...prev, createPost])
+  navigate('/post')
 
-    const [createpost,setCreatePost]= useState(INITIAL_VALUE)
-
-
-    const handlechange = ()=>{
-
-    }
-    console.log(setUser)
+ }
   return (
     <>
-    <h1>Create Post</h1>
-    <form>
+      <h1> Post Create</h1>
+      <form onSubmit={handleSubmit}>
         <div>
-           <label>Tittle</label>
-             <input type='text' name='tittle'  onChange={handlechange}></input>
+          <label>Title</label>
+          <input type='text' name='title' onChange={handleChange} value={createPost.title} />
         </div>
         <div>
-           <label>Body</label>
-             <input type='text' name='body' onChange={handlechange} ></input>
+          <label>Body</label>
+          <input type='text' name='body' onChange={handleChange} value={createPost.body} />
         </div>
         <div>
-           <label>author</label>
-             <input type='text' name='auther' value={setUser.name} onChange={handlechange} ></input>
+          <label>Author</label>
+          <input
+            type='text'
+            name='author'
+            value={createPost.author}
+            onChange={handleChange}
+            readOnly // Optional: prevent editing
+          />
         </div>
-        
-
-    </form>
+        <button>Create</button>
+      </form>
     </>
-  )
-}
+  );
+};
 
-export default PostCreate
+export default PostCreate;
